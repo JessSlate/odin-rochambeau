@@ -87,6 +87,7 @@ for(let i = 0; i < maxGames; i++){
     let result = game();
 
     if (result == "tie"){
+        i--; //ties no longer count against max games
         ties += 1;
     } else if (result == "pc"){
         playerScore += 1;
@@ -100,4 +101,4 @@ if(playerScore > computerScore){
 } else if (computerScore > playerScore){
     score = "\nYou lose!"
 } else score = "\nDraw!"
-alert("Game over\nGames: " + maxGames + "\nTies: " + ties + "\nWon: " + playerScore + "\nLost: " + computerScore + score);
+alert("Game over\nGames: " + (maxGames + ties) + "\nTies: " + ties + "\nWon: " + playerScore + "\nLost: " + computerScore + score);
