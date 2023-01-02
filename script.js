@@ -27,7 +27,7 @@ function getPlayerChoice(error = ""){
 function playGame(player, computer){
     const win = 1
         , lose = 0;
-    // handle a tie
+    // treating ties as losses
     if (player == computer){
         alert("Tie!");
         return lose;
@@ -78,5 +78,14 @@ function game(){
     return playGame(playerChoice, computerChoice);
 }
 
-
+const maxGames = 5;
+let score = 0;
+for(let i = 0; i < maxGames; i++){
+    //add result of game to score
+    score += game();
+}
+//calculate score
+if (score / maxGames < 0.5){
+    alert("Sorry, you lost in a best of " + maxGames);
+} else alert("You won in a best of " + maxGames);
 
