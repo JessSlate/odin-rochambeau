@@ -52,6 +52,7 @@ function playGame(player, computer){
             return;
         }
     }
+
     if(player == "scissors"){
         if(computer == "rock"){
             alert("You lose! rock smashes scissors.");
@@ -65,9 +66,13 @@ function playGame(player, computer){
 
 }
 
-let computerChoice = getComputerChoice();
-let playerChoice = getPlayerChoice();
-while (!(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")){
-    playerChoice = getPlayerChoice("Please input rock, paper, or scissors.\n");
+// game loop
+function game(){
+    let computerChoice = getComputerChoice();
+    let playerChoice = getPlayerChoice();
+    while (!(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")){
+        playerChoice = getPlayerChoice("Please input rock, paper, or scissors.\n");
+    }
+    playGame(playerChoice, computerChoice);
 }
-playGame(playerChoice, computerChoice);
+
