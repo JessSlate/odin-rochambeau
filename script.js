@@ -11,9 +11,9 @@ function getComputerChoice(){
 }
 
 // prompt for the player's choice:
-function getPlayerChoice(){
+function getPlayerChoice(error = ""){
 
-    let choice = prompt("Will you choose rock, paper, or scissors?");
+    let choice = prompt(error + "Will you choose rock, paper, or scissors?");
     
     // handle cancel or exit selection on prompt:
     if (!choice){
@@ -30,3 +30,6 @@ function playGame(player1, player2){
 
 let computerChoice = getComputerChoice();
 let playerChoice = getPlayerChoice();
+while (!(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")){
+    playerChoice = getPlayerChoice("Please input rock, paper, or scissors.\n");
+}
