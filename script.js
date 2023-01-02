@@ -25,44 +25,43 @@ function getPlayerChoice(error = ""){
 
 // Function to play one round of the game
 function playGame(player, computer){
-    const win = 1
-        , lose = 0;
+
     // treating ties as losses
     if (player == computer){
         alert("Tie!");
-        return lose;
+        return "tie";
     }
 
     if(player == "rock"){
         if(computer == "paper"){
             alert("You lose! paper covers rock.");
-            return lose;
+            return "com";
         }
         if(computer == "scissors"){
             alert("You win! rock smashes scissors.");
-            return win;
+            return "pc";
         }
     }
 
     if(player == "paper"){
         if(computer == "rock"){
             alert("You win! paper covers rock.");
-            return win;
+            return "pc";
         }
         if(computer == "scissors"){
             alert("You lose! scissors cut paper.");
-            return lose;
+            return "com";
         }
     }
 
     if(player == "scissors"){
         if(computer == "rock"){
             alert("You lose! rock smashes scissors.");
-            return lose;
+            return "com";
         }
         if(computer == "paper"){
             alert("You win! scissors cut paper.");
-            return win;
+            return "pc";
         }
     }
 
@@ -79,13 +78,26 @@ function game(){
 }
 
 const maxGames = 5;
-let score = 0;
-for(let i = 0; i < maxGames; i++){
-    //add result of game to score
-    score += game();
-}
-//calculate score
-if (score / maxGames < 0.5){
-    alert("Sorry, you lost in a best of " + maxGames);
-} else alert("You won in a best of " + maxGames);
+let playerScore = 0,
+    ties = 0,
+    computerScore = 0;
 
+for(let i = 0; i < maxGames; i++){
+    //record result and add to score
+    let result = game();
+
+    if (result == "tie"){
+        ties += 1;
+    } else if (result == "pc"){
+        playerScore += 1;
+    } else computerScore += 1;
+}
+
+//calculate score
+let score = "";
+if(playerScore > computerScore){
+    score = "\nYou win!"
+} else if (computerScore > playerScore){
+    score = "\nYou lose!"
+} else score = "\nDraw!"
+alert("Game over\nGames: " + maxGames + "\nTies: " + ties + "\nWon: " + playerScore + "\nLost: " + computerScore + score);
