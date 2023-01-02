@@ -97,8 +97,8 @@ for(let i = 0; i < maxGames; i++){
 //calculate score
 let score = "";
 if(playerScore > computerScore){
-    score = "\nYou win!"
+    score = "\nYou win!";
 } else if (computerScore > playerScore){
-    score = "\nYou lose!"
-} else score = "\nDraw!"
+    score = "\nYou lose!";
+} else score = "\nDraw!";
 alert("Game over\nGames: " + (maxGames + ties) + "\nTies: " + ties + "\nWon: " + playerScore + "\nLost: " + computerScore + score);
