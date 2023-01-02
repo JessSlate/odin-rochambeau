@@ -24,7 +24,44 @@ function getPlayerChoice(error = ""){
 }
 
 // Function to play one round of the game
-function playGame(player1, player2){
+function playGame(player, computer){
+    // handle a tie
+    if (player == computer){
+        alert("Tie!");
+        return;
+    }
+
+    if(player == "rock"){
+        if(computer == "paper"){
+            alert("You lose! paper covers rock.");
+            return;
+        }
+        if(computer == "scissors"){
+            alert("You win! rock smashes scissors.");
+            return;
+        }
+    }
+
+    if(player == "paper"){
+        if(computer == "rock"){
+            alert("You win! paper covers rock.");
+            return;
+        }
+        if(computer == "scissors"){
+            alert("You lose! scissors cut paper.");
+            return;
+        }
+    }
+    if(player == "scissors"){
+        if(computer == "rock"){
+            alert("You lose! rock smashes scissors.");
+            return;
+        }
+        if(computer == "paper"){
+            alert("You win! scissors cut paper.");
+            return;
+        }
+    }
 
 }
 
@@ -33,3 +70,4 @@ let playerChoice = getPlayerChoice();
 while (!(playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")){
     playerChoice = getPlayerChoice("Please input rock, paper, or scissors.\n");
 }
+playGame(playerChoice, computerChoice);
