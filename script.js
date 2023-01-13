@@ -105,8 +105,62 @@ alert("Game over\nGames: " + (maxGames + ties) + "\nTies: " + ties + "\nWon: " +
 
 */
 
+function getComputerChoice(){
+    let result = Math.floor(Math.random() * 3) +1;
+    switch(result){
+        case 1: return "rock";
+        case 2: return "paper";
+        case 3: return "scissors";
+    };
+};
+
+function getWinner(player, computer){
+
+    // treating ties as losses
+    if (player == computer){
+        alert("Tie!");
+        return "tie";
+    }
+
+    if(player == "rock"){
+        if(computer == "paper"){
+            alert("You lose! paper covers rock.");
+            return "com";
+        }
+        if(computer == "scissors"){
+            alert("You win! rock smashes scissors.");
+            return "pc";
+        }
+    }
+
+    if(player == "paper"){
+        if(computer == "rock"){
+            alert("You win! paper covers rock.");
+            return "pc";
+        }
+        if(computer == "scissors"){
+            alert("You lose! scissors cut paper.");
+            return "com";
+        }
+    }
+
+    if(player == "scissors"){
+        if(computer == "rock"){
+            alert("You lose! rock smashes scissors.");
+            return "com";
+        }
+        if(computer == "paper"){
+            alert("You win! scissors cut paper.");
+            return "pc";
+        }
+    }
+
+}
+
 function playRound(e){
-    
+    let computerSelection = getComputerChoice();
+    let playerSelection = e.target.id;
+    console.log(getWinner(playerSelection, computerSelection));
 
 };
 
