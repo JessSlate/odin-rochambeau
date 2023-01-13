@@ -105,3 +105,12 @@ alert("Game over\nGames: " + (maxGames + ties) + "\nTies: " + ties + "\nWon: " +
 
 */
 
+function playRound(e){
+    
+
+};
+
+const gameBtns = document.getElementsByClassName("selection");
+for(const btn of gameBtns){
+    btn.addEventListener("click", playRound);
+}
