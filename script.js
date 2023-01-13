@@ -1,4 +1,4 @@
-
+/*
 
 // Function to assign the computer's choice
 function getComputerChoice(){
@@ -102,3 +102,6 @@ if(playerScore > computerScore){
     score = "\nYou lose!";
 } else score = "\nDraw!";
 alert("Game over\nGames: " + (maxGames + ties) + "\nTies: " + ties + "\nWon: " + playerScore + "\nLost: " + computerScore + score);
+
+*/
+
