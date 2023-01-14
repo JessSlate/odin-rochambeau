@@ -108,6 +108,8 @@ const WIN = 1
     , TIE = 0
     , LOSE = -1;
 
+let roundCounter = 0;
+
 function getComputerChoice(){
     //generate a random number between 1 and 3 inclusive.
     let result = Math.floor(Math.random() * 3) +1;
@@ -186,10 +188,10 @@ function updateMessage(player, computer, result){
     //determine which message to display
     switch(result){
         case WIN:
-            message = `${player} beats ${computer.toLowerCase()}. You win this round.`;
+            message = `${player} beats ${computer.toLowerCase()}.`;
             break;
         case LOSE:
-            message = `${computer} beats ${player.toLowerCase()}. You lose this round.`;
+            message = `${computer} beats ${player.toLowerCase()}.`;
             break;
         case TIE:
             message = `Draw!`;
@@ -203,17 +205,32 @@ function updateMessage(player, computer, result){
 }
 
 function playRound(e){
-    const computerSelection = getComputerChoice();
-    const playerSelection = e.target.id;
-    //determine winner
-    const winner = getWinner(playerSelection, computerSelection)
-    //update UI
-    updateScoreboard(winner);
-    updateMessage(playerSelection, computerSelection, winner);
+    if(roundCounter < 5){
+        const computerSelection = getComputerChoice();
+        const playerSelection = e.target.id;
+        //determine winner
+        const winner = getWinner(playerSelection, computerSelection);
+        //update UI
+        updateScoreboard(winner);
+        updateMessage(playerSelection, computerSelection, winner);
+        //update round counter
+        if(winner != TIE) roundCounter++;
+    }
 
 };
+
+function resetGame(){
+    roundCounter = 0;
+    const scores = document.getElementsByTagName("td");
+    for(val of scores){
+        val.textContent = "0";
+    }
+
+}
 
 const gameBtns = document.getElementsByClassName("selection");
 for(const btn of gameBtns){
     btn.addEventListener("click", playRound);
 }
+const resetBtn = document.getElementById("reset-button");
+resetBtn.addEventListener("click", resetGame);
