@@ -159,6 +159,7 @@ function updateScoreboard(result){
         ties = document.getElementById("ties"),
         computerScore = document.getElementById("computer-score");
 
+    //update specific cell based on round result
     switch(result){
         case WIN:
             playerScore.textContent = (
@@ -181,6 +182,8 @@ function updateScoreboard(result){
 function updateMessage(player, computer, result){
     const headsUp = document.querySelector(".message p");
     let message = "";
+
+    //determine which message to display
     switch(result){
         case WIN:
             message = `${player} beats ${computer.toLowerCase()}. You win this round.`;
@@ -193,15 +196,18 @@ function updateMessage(player, computer, result){
             break;
         default: break;
     }
+
+    //update message on the page
     headsUp.textContent = message;
-    return
+    return;
 }
 
 function playRound(e){
     const computerSelection = getComputerChoice();
     const playerSelection = e.target.id;
+    //determine winner
     const winner = getWinner(playerSelection, computerSelection)
-
+    //update UI
     updateScoreboard(winner);
     updateMessage(playerSelection, computerSelection, winner);
 
