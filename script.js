@@ -104,63 +104,106 @@ if(playerScore > computerScore){
 alert("Game over\nGames: " + (maxGames + ties) + "\nTies: " + ties + "\nWon: " + playerScore + "\nLost: " + computerScore + score);
 
 */
+const WIN = 1
+    , TIE = 0
+    , LOSE = -1;
 
 function getComputerChoice(){
+    //generate a random number between 1 and 3 inclusive.
     let result = Math.floor(Math.random() * 3) +1;
+
     switch(result){
-        case 1: return "rock";
-        case 2: return "paper";
-        case 3: return "scissors";
+        case 1: return "Rock";
+        case 2: return "Paper";
+        case 3: return "Scissors";
     };
 };
 
 function getWinner(player, computer){
 
-    // treating ties as losses
     if (player == computer){
-        alert("Tie!");
-        return "tie";
+        return TIE;
     }
 
-    if(player == "rock"){
-        if(computer == "paper"){
-            alert("You lose! paper covers rock.");
-            return "com";
+    if(player == "Rock"){
+        if(computer == "Paper"){
+            return LOSE;
         }
-        if(computer == "scissors"){
-            alert("You win! rock smashes scissors.");
-            return "pc";
+        if(computer == "Scissors"){
+            return WIN;
         }
     }
 
-    if(player == "paper"){
-        if(computer == "rock"){
-            alert("You win! paper covers rock.");
-            return "pc";
+    if(player == "Paper"){
+        if(computer == "Rock"){
+            return WIN;
         }
-        if(computer == "scissors"){
-            alert("You lose! scissors cut paper.");
-            return "com";
+        if(computer == "Scissors"){
+            return LOSE;
         }
     }
 
-    if(player == "scissors"){
-        if(computer == "rock"){
-            alert("You lose! rock smashes scissors.");
-            return "com";
+    if(player == "Scissors"){
+        if(computer == "Rock"){
+            return LOSE;
         }
-        if(computer == "paper"){
-            alert("You win! scissors cut paper.");
-            return "pc";
+        if(computer == "Paper"){
+            return WIN;
         }
+    };
+};
+
+function updateScoreboard(result){
+
+    const playerScore = document.getElementById("player-score"),
+        ties = document.getElementById("ties"),
+        computerScore = document.getElementById("computer-score");
+
+    switch(result){
+        case WIN:
+            playerScore.textContent = (
+                parseInt(playerScore.textContent) + 1);
+            break;
+        case LOSE:
+            computerScore.textContent = (
+                parseInt(computerScore.textContent) + 1);
+            break;
+        case TIE:
+            ties.textContent = (
+                parseInt(ties.textContent) + 1);
+            break;
+        default: break;
     }
 
+    return;
+};
+
+function updateMessage(player, computer, result){
+    const headsUp = document.querySelector(".message p");
+    let message = "";
+    switch(result){
+        case WIN:
+            message = `${player} beats ${computer.toLowerCase()}. You win this round.`;
+            break;
+        case LOSE:
+            message = `${computer} beats ${player.toLowerCase()}. You lose this round.`;
+            break;
+        case TIE:
+            message = `Draw!`;
+            break;
+        default: break;
+    }
+    headsUp.textContent = message;
+    return
 }
 
 function playRound(e){
-    let computerSelection = getComputerChoice();
-    let playerSelection = e.target.id;
-    console.log(getWinner(playerSelection, computerSelection));
+    const computerSelection = getComputerChoice();
+    const playerSelection = e.target.id;
+    const winner = getWinner(playerSelection, computerSelection)
+
+    updateScoreboard(winner);
+    updateMessage(playerSelection, computerSelection, winner);
 
 };
 
