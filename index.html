@@ -7,12 +7,13 @@
         <link rel="stylesheet" href="./styles.css">
     </head>
     <body>
+
         <div class="scoreboard">
             <table>
                 <tr>
-                    <th>You</th>
+                    <th>Win</th>
                     <th>Draw</th>
-                    <th>CPU</th>
+                    <th>Lose</th>
                 </tr>
                 <tr>
                     <td id="player-score">0</td>
@@ -29,8 +30,8 @@
             <button id="Paper" class="selection">📃</button>
             <button id="Scissors" class="selection">✂️</button>
         </div>
-        <div>
-            <button id="reset-button">Reset</button>
+        <div class="reset-container">
+            <button id="reset-button" class="hidden">Play again</button>
         </div>
     </body>
 </html>

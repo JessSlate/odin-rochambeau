@@ -9,19 +9,17 @@ body{
 
 }
 
-.input,
-.scoreboard,
-.message{
+div{
     display: flex;
     width: 100%;
     justify-content: center;
+    align-items: center;
     
 }
 
 .scoreboard{
-    align-items: flex-end;
     margin-top: auto;
-    height: 50%;
+    align-items: flex-end;
 }
 
 .message{
@@ -38,10 +36,12 @@ body{
 
 .input{
     align-items: flex-start;
-    margin-bottom: auto;
     gap: 22px;
-    height: 50%;
 
+}
+
+.reset-container{
+    margin-bottom: auto;
 }
 
 button{
@@ -58,4 +58,12 @@ table{
 th{
     font-size: 24px;
     padding-bottom: 18px;
+}
+
+#reset-button{
+    margin: 12px;
+}
+
+.hidden{
+    scale: 0;
 }

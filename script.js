@@ -106,7 +106,10 @@ alert("Game over\nGames: " + (maxGames + ties) + "\nTies: " + ties + "\nWon: " +
 */
 const WIN = 1
     , TIE = 0
-    , LOSE = -1;
+    , LOSE = -1
+    , MAX_ROUNDS = 5
+    , RED_BG = "#FF6C95"
+    , GREEN_BG = "#A7FF6C";
 
 let roundCounter = 0;
 
@@ -125,33 +128,33 @@ function getWinner(player, computer){
 
     if (player == computer){
         return TIE;
-    }
+    };
 
     if(player == "Rock"){
         if(computer == "Paper"){
             return LOSE;
-        }
+        };
         if(computer == "Scissors"){
             return WIN;
-        }
-    }
+        };
+    };
 
     if(player == "Paper"){
         if(computer == "Rock"){
             return WIN;
-        }
+        };
         if(computer == "Scissors"){
             return LOSE;
-        }
-    }
+        };
+    };
 
     if(player == "Scissors"){
         if(computer == "Rock"){
             return LOSE;
-        }
+        };
         if(computer == "Paper"){
             return WIN;
-        }
+        };
     };
 };
 
@@ -176,7 +179,7 @@ function updateScoreboard(result){
                 parseInt(ties.textContent) + 1);
             break;
         default: break;
-    }
+    };
 
     return;
 };
@@ -197,15 +200,34 @@ function updateMessage(player, computer, result){
             message = `Draw!`;
             break;
         default: break;
-    }
+    };
 
     //update message on the page
     headsUp.textContent = message;
-    return;
-}
+};
 
-function playRound(e){
-    if(roundCounter < 5){
+function showResetButton(){
+    //unhide button
+    let resetBtn = document.getElementById("reset-button");
+    resetBtn.classList.remove("hidden");
+    //get the final score
+    const playerScore = parseInt(document.getElementById("player-score").textContent),
+        computerScore = parseInt(document.getElementById("computer-score").textContent);
+    
+    //update text content
+    if(playerScore > computerScore){
+        resetBtn.textContent = "You win, play again?";
+        resetBtn.style.backgroundColor = GREEN_BG;
+    } else {
+        resetBtn.textContent = "You lose, play again?";
+        resetBtn.style.backgroundColor = RED_BG;
+    };
+    
+};
+
+function playGame(e){
+    //play to five rounds
+    if(roundCounter < MAX_ROUNDS){
         const computerSelection = getComputerChoice();
         const playerSelection = e.target.id;
         //determine winner
@@ -215,22 +237,26 @@ function playRound(e){
         updateMessage(playerSelection, computerSelection, winner);
         //update round counter
         if(winner != TIE) roundCounter++;
-    }
-
+    } else showResetButton(); //allow player to reset
 };
 
 function resetGame(){
     roundCounter = 0;
+
+    let resetBtn = document.getElementById("reset-button");
+    resetBtn.classList.add("hidden");
+
     const scores = document.getElementsByTagName("td");
     for(val of scores){
         val.textContent = "0";
-    }
-
-}
+    };
+    const headsUp = document.querySelector(".message p");
+    headsUp.textContent = "Welcome to Rochambeau - make a selection to begin";
+};
 
 const gameBtns = document.getElementsByClassName("selection");
 for(const btn of gameBtns){
-    btn.addEventListener("click", playRound);
-}
+    btn.addEventListener("click", playGame);
+};
 const resetBtn = document.getElementById("reset-button");
 resetBtn.addEventListener("click", resetGame);
